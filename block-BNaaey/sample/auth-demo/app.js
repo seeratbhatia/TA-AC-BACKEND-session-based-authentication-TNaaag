@@ -6,7 +6,7 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var session = require('express-session');
 require('dotenv').config();
-var MongoStore = require('connect-mongo');
+var MongoStore = require('connect-mongo')(session);
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -27,12 +27,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
-  secret: process.env.SECRET,
+  secret: "somerandomsecret",
   resave: false,
   saveUninitialized: false,
-  store: new MongoStore({mongoUrl:'mongodb://localhost/user-login'})
+  store: new MongoStore({ mongooseConnection: mongoose.Connection })
 }))
-
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
