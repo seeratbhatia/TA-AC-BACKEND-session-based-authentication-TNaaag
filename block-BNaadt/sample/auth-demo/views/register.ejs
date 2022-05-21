@@ -10,13 +10,36 @@
 
 <body>
     <form action="/users/register" method="POST">
-        <input type="text" name="name" placeholder="Name"> <br>
-        <input type="email" name="email" placeholder="Email"> <br>
-        <input type="password" name="password" placeholder="Password"> <br>
-        <input type="age" name="age" placeholder="Age"> <br>
-        <input type="tel" name="phone" placeholder="Phone"> <br>
-        <input type="submit" value="Register">
+        <% if(uniqueEmail){ %>
+            <p> <%=uniqueEmail%></p>
+       <% }  %>
+       <% if(minimumPassword){ %>
+        <p> <%=minimumPassword%></p>
+    <% }  %>
+    <input type="text" name="name" placeholder="Name">
+    <input type="email" name="email" placeholder="Email">
+    <input type="password" name="password" placeholder="Password">
+    <input type="age" name="age" placeholder="Age">
+    <input type="tel" name="phone" placeholder="Phone">
+    <input type="submit" value="Register">
+        <% if(error){ %>
+            <p>
+                <%=error%>
+            </p>
+            <% } %>
+                <input type="text" name="name" placeholder="Name">
+                <input type="email" name="email" placeholder="Email">
+                <input type="password" name="password" placeholder="Password">
+                <input type="age" name="age" placeholder="Age">
+                <input type="tel" name="phone" placeholder="Phone">
+                <input type="submit" value="Register">
     </form>
+    <style>
+        p{
+        p {
+            color: red;
+        }
+    </style>
 </body>
 
 </html> 
